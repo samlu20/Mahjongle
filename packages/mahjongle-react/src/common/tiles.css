@@ -1,0 +1,43 @@
+.tile-SF {
+  background: url('imgs/mahjong-tile-sheet.jpg') no-repeat -120px -56px;
+  width: 448px;
+  height: 578px;
+}
+
+.tile-UF {
+  background: url('imgs/mahjong-tile-sheet.jpg') no-repeat -647px -56px;
+  width: 449px;
+  height: 584px;
+}
+
+.tile-FF {
+  background: url('imgs/mahjong-tile-sprite-sheet.png') no-repeat -1035px -185px;
+  width: 358px;
+  height: 485px;
+}
+
+.tile-WF {
+  background: url('imgs/mahjong-tile-sprite-sheet.png') no-repeat -1484px -185px;
+  width: 357px;
+  height: 485px;
+}
+
+.tile-OF {
+  background: url('imgs/mahjong-tile-sprite-sheet.png') no-repeat -1932px -185px;
+  width: 357px;
+  height: 485px;
+}
+
+.tile-PF {
+  background: url('imgs/mahjong-tile-sprite-sheet.png') no-repeat -2380px -185px;
+  width: 357px;
+  height: 485px;
+}
+
+.tile-CF {
+  background: url('imgs/mahjong-tile-sprite-sheet.png') no-repeat -2828px -185px;
+  width: 358px;
+  height: 485px;
+}
+
+.tile-8C {}

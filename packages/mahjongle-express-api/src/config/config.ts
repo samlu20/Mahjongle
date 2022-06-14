@@ -3,7 +3,7 @@ export default {
     user: 'postgres',
     host: 'mahjongle-db.corvffpxyrd6.us-east-2.rds.amazonaws.com',
     database: 'mahjongle',
-    password: 'PASSWORD_HERE',
+    password: 'MinsshiFaker#3',
     port: 5432,
   }
 };

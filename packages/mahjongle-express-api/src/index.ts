@@ -24,6 +24,19 @@ app.get('/users', async (request, response) => {
   response.json(data);
 });
 
+app.get('/tiles', async (request, response) => {
+  const data = await db.any('select * from "tile"', [true]);
+  response.json(data);
+});
+
+// add a new user, if it doesn't exist yet, and return the object:
+// app.get('/users/add/:name/:email', req => {
+//   return db.task('add-user', async t => {
+//       // const user = await t.users.findByName(req.params.name);
+//       // return user || await t.users.add(req.params.name);
+//   });
+// });
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 });

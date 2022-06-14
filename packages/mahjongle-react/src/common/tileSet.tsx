@@ -5,12 +5,6 @@ export default class TileSet extends React.Component {
   render() {
     const tiles = ['1D', '2D', '3C', '1B'];
 
-    const tileProps = tiles.map(t => {
-      return {
-        src: ``
-      }
-    });
-
     return <div>
       {tiles.map((code) => this.getTileImg(code))}
     </div>;

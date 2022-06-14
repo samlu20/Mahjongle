@@ -3537,7 +3537,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express@npm:*, @types/express@npm:^4.17.13":
+"@types/express@npm:*, @types/express@npm:4.17.13, @types/express@npm:^4.17.13":
   version: 4.17.13
   resolution: "@types/express@npm:4.17.13"
   dependencies:
@@ -3664,6 +3664,13 @@ __metadata:
   version: 17.0.31
   resolution: "@types/node@npm:17.0.31"
   checksum: 704618350f8420d5c47db0f7778398e821b7724369946f5c441a7e6b9343295553936400eb8309f0b07d5e39c240988ab3456b983712ca86265dabc9aee4ad3d
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:16.10.2":
+  version: 16.10.2
+  resolution: "@types/node@npm:16.10.2"
+  checksum: 83c1c3c68e7500103908c3f16094e458879c840a719c15b6ea577f81fe1f24a1b3473bb6c8e8091fe79a82543ca7639c6b1088fcf80292ec091d1d1c9504a87e
   languageName: node
   linkType: hard
 
@@ -4621,6 +4628,13 @@ __metadata:
   dependencies:
     safer-buffer: ~2.1.0
   checksum: 39f2ae343b03c15ad4f238ba561e626602a3de8d94ae536c46a4a93e69578826305366dc09fbb9b56aec39b4982a463682f259c38e59f6fa380cd72cd61e493d
+  languageName: node
+  linkType: hard
+
+"assert-options@npm:0.7.0":
+  version: 0.7.0
+  resolution: "assert-options@npm:0.7.0"
+  checksum: 447e3de35a57860b29d7f3907cfdd97cff8a763195bac9cf1f5982011904ec464da239cbc6f5ee2090f1a20be9babc1b7aa1468225bbd15ae5d96ca067dd720f
   languageName: node
   linkType: hard
 
@@ -10514,6 +10528,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mahjongle-express-api@workspace:packages/mahjongle-express-api":
+  version: 0.0.0-use.local
+  resolution: "mahjongle-express-api@workspace:packages/mahjongle-express-api"
+  dependencies:
+    "@types/express": 4.17.13
+    "@types/node": 16.10.2
+    cors: ^2.8.5
+    express: ^4.18.1
+    pg: ^8.7.3
+    pg-promise: ^10.11.1
+    tsc: ^2.0.4
+    typescript: 4.4.3
+  languageName: unknown
+  linkType: soft
+
 "mahjongle-react@workspace:packages/mahjongle-react":
   version: 0.0.0-use.local
   resolution: "mahjongle-react@workspace:packages/mahjongle-react"
@@ -12061,12 +12090,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pg-pool@npm:^3.5.1":
+"pg-minify@npm:1.6.2":
+  version: 1.6.2
+  resolution: "pg-minify@npm:1.6.2"
+  checksum: 3d2668b5cd575298ef2bd82b388ed7eeb0b66c51ee722039c1b6c011cfcf7e5fb464488a6422338034d505c0549946cf10a07c722d3c6948d9b7c2cc42f7c26f
+  languageName: node
+  linkType: hard
+
+"pg-pool@npm:^3.4.1, pg-pool@npm:^3.5.1":
   version: 3.5.1
   resolution: "pg-pool@npm:3.5.1"
   peerDependencies:
     pg: ">=8.0"
   checksum: 42833c25f18fee41a1b2d955978f1403e93164762a7e57d3a870429103d302f1899b393ab021bb8144272037eb3f13bdb9f16a4c4afaa3efd3d2c3689738038f
+  languageName: node
+  linkType: hard
+
+"pg-promise@npm:^10.11.1":
+  version: 10.11.1
+  resolution: "pg-promise@npm:10.11.1"
+  dependencies:
+    assert-options: 0.7.0
+    pg: 8.7.1
+    pg-minify: 1.6.2
+    spex: 3.2.0
+  checksum: 17e59742af51646db9581e825689ef4766993182833775bdedbe32bd4b4bcf7b63a1fd67a6d0be2ef231f6111df798a204d7b702d14cd7731e06c54ae6e8546a
   languageName: node
   linkType: hard
 
@@ -12087,6 +12135,26 @@ __metadata:
     postgres-date: ~1.0.4
     postgres-interval: ^1.1.0
   checksum: bf4ec3f594743442857fb3a8dfe5d2478a04c98f96a0a47365014557cbc0b4b0cee01462c79adca863b93befbf88f876299b75b72c665b5fb84a2c94fbd10316
+  languageName: node
+  linkType: hard
+
+"pg@npm:8.7.1":
+  version: 8.7.1
+  resolution: "pg@npm:8.7.1"
+  dependencies:
+    buffer-writer: 2.0.0
+    packet-reader: 1.0.0
+    pg-connection-string: ^2.5.0
+    pg-pool: ^3.4.1
+    pg-protocol: ^1.5.0
+    pg-types: ^2.1.0
+    pgpass: 1.x
+  peerDependencies:
+    pg-native: ">=2.0.0"
+  peerDependenciesMeta:
+    pg-native:
+      optional: true
+  checksum: 3a17d9a73df9c9f5f99400751144f9d5e8dbe1948ca44f5b5eecb2166ad78cab36d070c2a97438cd3a5d1d083e70af1d3e0aad4554a45fe74b77d98ed4487242
   languageName: node
   linkType: hard
 
@@ -14663,6 +14731,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"spex@npm:3.2.0":
+  version: 3.2.0
+  resolution: "spex@npm:3.2.0"
+  checksum: 2c562283bf9bfd4f101aa3622f00599bd2e5954ecb88339a2018d54dc2501a24d6c8e6a1f4148161ffce09dff28b81643927c4bb2795bbccdf4cf0592a45422b
+  languageName: node
+  linkType: hard
+
 "split-on-first@npm:^1.0.0":
   version: 1.1.0
   resolution: "split-on-first@npm:1.1.0"
@@ -15464,6 +15539,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tsc@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "tsc@npm:2.0.4"
+  bin:
+    tsc: bin/tsc
+  checksum: 50b10240887424c66454687f0fca4e319713b35cb44f0dab228719eb4dd757251f83c3d79e60d29dfbe90c2d6f1272f793b83e75a9fca2c622b4213ad3eb8cb1
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths@npm:^3.14.1":
   version: 3.14.1
   resolution: "tsconfig-paths@npm:3.14.1"
@@ -15617,6 +15701,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:4.4.3":
+  version: 4.4.3
+  resolution: "typescript@npm:4.4.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 05823f21796d450531a7e4ab299715d38fd9ded0e4ce7400876053f4b5166ca3dde7a68cecfe72d9086039f03c0b6edba36516fb10ed83c5837d9600532ea4c2
+  languageName: node
+  linkType: hard
+
 "typescript@npm:^4.6.4":
   version: 4.6.4
   resolution: "typescript@npm:4.6.4"
@@ -15624,6 +15718,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: e7bfcc39cd4571a63a54e5ea21f16b8445268b9900bf55aee0e02ad981be576acc140eba24f1af5e3c1457767c96cea6d12861768fb386cf3ffb34013718631a
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@4.4.3#~builtin<compat/typescript>":
+  version: 4.4.3
+  resolution: "typescript@patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=bda367"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 33a916819907e819430802c50405f18c187448d678696a81545f494a7ec16207f8c15340c945df62109bd1d951091a9f15f3d2eb931a3c889f962c8509017697
   languageName: node
   linkType: hard
 

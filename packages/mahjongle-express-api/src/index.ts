@@ -24,6 +24,13 @@ app.get('/users', async (request, response) => {
   response.json(data);
 });
 
+app.get('/users/:userId/hands/:handId', async (request, response) => {
+  const userId = request.params.userId;
+  const handId = request.params.handId;
+  const data = await db.any({ text: 'SELECT * FROM hand WHERE user_id = $1 AND id = $2', values: [ userId, handId ]});
+  response.json(data);
+});
+
 app.get('/tiles', async (request, response) => {
   const data = await db.any('select * from "tile"', [true]);
   response.json(data);

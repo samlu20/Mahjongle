@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "wJ9VUrDlaDhu+N2N70HysBwS1O7XM7ALImYhaxsgZKg=",
+  "Source": "mahjongle-dotnet-api",
+  "BasePath": "_content/mahjongle-dotnet-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

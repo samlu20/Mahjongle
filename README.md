@@ -1,1 +1,4 @@
 # Mahjongle
+
+Startup
+`psql`

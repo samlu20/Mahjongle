@@ -56,7 +56,7 @@ export default class LoginModal extends React.Component<IProps, IState> {
       this.isModalOpen = this.props.open;
       this.forceUpdate();
     }
-}
+  }
 
   render() {
     return (

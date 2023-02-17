@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 
 import logo from './logo.svg';
 import './App.css';
 import Dashboard from '../components/Dashboard';
+import HandBuilder from '../components/HandBuilder';
+import NumberTiles from '../components/CharacterTiles';
 import SiteHeader from '../core/SiteHeader';
 import Tile from '../tiles/tileSelector';
 import TileSet from '../common/tileSet';
@@ -12,20 +14,25 @@ import TileSet from '../common/tileSet';
 
 function App() {
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Dashboard />,
-    },
-  ]);
-
-  return (
+  const App = () => (
     <div className='App'>
       <SiteHeader />
       <div className='App-content'>
-        <RouterProvider router={router} />
+        <Outlet />
       </div>
     </div>
+  );
+
+  const router = createBrowserRouter([
+    { element: <App />, children:  [
+      { path: '/', element: <Dashboard /> },
+      { path: '/add-hand', element: <HandBuilder /> },
+      { path: '/numbers', element: <NumberTiles /> },
+    ]}
+  ]);
+
+  return (
+    <RouterProvider router={router} />
   );
   // return (
   //   <div className="App">

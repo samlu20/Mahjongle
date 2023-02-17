@@ -1,11 +1,23 @@
 import React from 'react';
 
+import { Link } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Drawer from '@mui/material/Drawer';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+
 import LoginModal from './LoginModal';
 
 interface IProps {
@@ -13,7 +25,14 @@ interface IProps {
 
 interface IState {
   isLoginModalOpen?: boolean;
+  isMenuOpen?: boolean;
   windowWidth?: number;
+}
+
+interface MenuItem {
+  text: string;
+  route: string;
+  icon?: string;
 }
 
 export default class SiteHeader extends React.Component<IProps, IState> {
@@ -21,7 +40,8 @@ export default class SiteHeader extends React.Component<IProps, IState> {
   state: any = { 
     width: window.innerWidth,
     height: window.innerHeight,
-    isLoginModalOpen: false
+    isLoginModalOpen: false,
+    isMenuOpen: false,
   };
   
   constructor(props: IProps) {
@@ -32,6 +52,12 @@ export default class SiteHeader extends React.Component<IProps, IState> {
       windowWidth: window.innerWidth
     };
   }
+
+  private readonly menuItems: Array<MenuItem> = [
+    { text: 'Chinese numbers', route: '/numbers' },
+    { text: 'Add winning hand', route: '/add-hand' },
+    { text: 'Stats', route: '/stats' },
+  ];
 
   render() {
     return (
@@ -44,6 +70,7 @@ export default class SiteHeader extends React.Component<IProps, IState> {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
+              onClick={this.toggleMenuDrawer(true)}
             >
               <MenuIcon />
             </IconButton>
@@ -54,24 +81,79 @@ export default class SiteHeader extends React.Component<IProps, IState> {
           </Toolbar>
         </AppBar>
         <LoginModal open={!!this.state.isLoginModalOpen} onClose={this.handleLoginModalClose} />
+        <Drawer
+          anchor={"left"}
+          open={this.state.isMenuOpen}
+          onClose={this.toggleMenuDrawer(false)}
+        >
+              <Box
+                sx={{ width: 250 }}
+                role="presentation"
+                onClick={this.toggleMenuDrawer(false)}
+                onKeyDown={this.toggleMenuDrawer(false)}
+              >
+                <List>
+                  {this.menuItems.map((item: MenuItem, index) => (
+                    <ListItem key={item.text} disablePadding>
+                      <ListItemButton
+                        component={Link} to={item.route}>
+                        <ListItemIcon>
+                          <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={item.text} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+                <Divider />
+                <List>
+                  {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                      <ListItemButton>
+                        <ListItemIcon>
+                          <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                      </ListItemButton>
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+        </Drawer>
       </React.Fragment>
     );
   }
 
-  // openLoginWindow(code: string) {
-  //   return <img src={tileImgs[code]} />
-  // }
+  toggleMenuDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' ||
+        (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+
+    this.setState({ ...this.state, isMenuOpen: open });
+  }
+
+  handleMenuItemClick = (route: string) => {
+    // if (!route)
+    //   return;
+
+    // const navigate = useNavigate();
+    // navigate(route);
+  }
 
   handleLoginModalOpen = () => {
-    this.setState({ isLoginModalOpen: true });
+    this.setState({ ...this.state, isLoginModalOpen: true });
   }
 
   handleLoginModalClose = () => {
-    this.setState({ isLoginModalOpen: false });
+    this.setState({ ...this.state, isLoginModalOpen: false });
   }
 
   updateDimensions = () => {
-    this.setState({ windowWidth: window.innerWidth });
+    this.setState({ ...this.state, windowWidth: window.innerWidth });
   }
 
   componentDidMount() {

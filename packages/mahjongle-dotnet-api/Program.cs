@@ -10,6 +10,15 @@ builder.Services.AddControllers();
 // builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
 builder.Services.RegisterServices();
+// builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+// {
+//   builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+// }));
+builder.Services.AddCors(policyBuilder =>
+  policyBuilder.AddDefaultPolicy(policy =>
+    policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod()
+  )
+);
 
 var app = builder.Build();
 
@@ -18,6 +27,8 @@ if (app.Environment.IsDevelopment())
 {
   app.UseSwagger();
   app.UseSwaggerUI();
+  // UseCors invocation must be placed between UseRouting and UseEndpoints invocations if they are present
+  app.UseCors("corsapp");
 }
 
 app.UseHttpsRedirection();

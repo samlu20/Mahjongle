@@ -1,0 +1,25 @@
+<mat-toolbar class="app-toolbar" color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+    (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+  </button>
+  <span>Mahjongle</span>
+  <span class="example-spacer"></span>
+  <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button> -->
+</mat-toolbar>
+
+<mat-drawer-container class="app-container" autosize>
+  <mat-drawer #drawer class="app-sidenav" mode="side">
+    <p>Sidenav</p>
+  </mat-drawer>
+
+  <div class="app-sidenav-content">
+    <p>Content</p>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

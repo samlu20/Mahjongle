@@ -1,0 +1,23 @@
+.app-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding-top: 64px;
+}
+
+.app-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-sidenav {
+    margin-top: 64px;
+    padding: 20px;
+}
+
+.app-toolbar {
+    position: fixed;
+    z-index: 100;
+}

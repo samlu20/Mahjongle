@@ -11,7 +11,7 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
-    "concurrently": "^7.1.0",
+    "concurrently": "^8.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "nodemon": "^2.0.16",
@@ -21,6 +21,8 @@
   "scripts": {
     "client": "yarn --cwd client run start",
     "server": "nodemon index",
-    "start": "concurrently \"yarn run server\" \"yarn run client\""
+    "start": "concurrently \"yarn run server\" \"yarn run client\"",
+    "angular": "npm run start --prefix \"packages/mahjongle-angular\"",
+    "dotnet": "dotnet watch --project \"packages/mahjongle-dotnet-api\" run"
   }
 }

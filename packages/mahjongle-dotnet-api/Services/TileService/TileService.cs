@@ -2,20 +2,32 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Npgsql;
+using mahjongle_dotnet_api.Repository;
+using mahjongle_dotnet_api.Services;
 
 namespace mahjongle_dotnet_api.Services.TileService
 {
   public class TileService : ITileService
   {
 
-    private static List<Tile> tileHand = new List<Tile> {
-        new Tile { Value = "S"},
-        new Tile { Value = "E" }
-    };
-    private static Tile northWindTile = new Tile { Value = "N" };
+    // private static List<Tile> tileHand = new List<Tile> {
+    //     new Tile { Value = "S"},
+    //     new Tile { Value = "E" }
+    // };
+
+    // private static Tile northWindTile = new Tile { Value = "N" };
+
+    // DataBaseService _databaseService;
+
+    // TileService(DataBaseService databaseService)
+    // {
+    //   _databaseService = databaseService;
+    // }
 
     public async Task<ServiceResponse<List<Tile>>> GetBambooTiles()
     {
+      /*
       // SELECT * FROM tile WHERE suit = 'bamboo';
       var serviceResponse = new ServiceResponse<List<Tile>>();
       serviceResponse.Data = new List<Tile> {
@@ -29,6 +41,29 @@ namespace mahjongle_dotnet_api.Services.TileService
             new Tile { Suit = TileSuit.Bamboo, Key = "8B", Value = "8" },
             new Tile { Suit = TileSuit.Bamboo, Key = "9B", Value = "9" },
         };
+      return serviceResponse;
+      */
+      // Connect to a PostgreSQL database
+      var connection = new NpgsqlConnection("Host=mahjongle-db.corvffpxyrd6.us-east-2.rds.amazonaws.com; Database=mahjongle; Username=postgres; Password=MinsshiFaker#3");
+      // var connection = _databaseService.GetDatabaseConnection();
+      connection.Open();
+
+      // Define a query
+      var command = new NpgsqlCommand("SELECT key, name FROM tile WHERE suit = 'wind';", connection);
+
+      // Execute the query and obtain a result set
+      NpgsqlDataReader reader = command.ExecuteReader();
+
+      var serviceResponse = new ServiceResponse<List<Tile>>();
+      serviceResponse.Data = new List<Tile>();
+
+      // Output rows
+      while (reader.Read())
+      {
+        serviceResponse.Data.Add(new Tile { Key = (string)reader[0], Suit = (string)reader[1] });
+      }
+
+      connection.Close();
       return serviceResponse;
     }
 

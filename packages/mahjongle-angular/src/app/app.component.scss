@@ -6,10 +6,12 @@
 }
 
 .app-sidenav-content {
-    display: flex;
+    // display: flex;
+    display: block;
     height: 100%;
     align-items: center;
     justify-content: center;
+    padding: 2em;
 }
 
 .app-sidenav {
@@ -20,4 +22,9 @@
 .app-toolbar {
     position: fixed;
     z-index: 100;
+}
+
+.app-content {
+    height: 100%;
+    width: 100%;
 }

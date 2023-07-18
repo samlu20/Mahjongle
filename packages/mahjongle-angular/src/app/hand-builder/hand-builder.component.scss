@@ -1,0 +1,49 @@
+.hand-builder-card {
+  height: 25%;
+  min-height: 15em;
+  max-height: 25em;
+  width: 100%;
+  padding: 1em;
+}
+
+.hand-builder-toolbar {
+  padding: 1em;
+  text-align: right;
+}
+
+.hand-builder-inner-container {
+  text-align: center;
+}
+
+.hand-builder-tile-group {
+  display: inline-block;
+}
+
+.hand-builder-tile {
+  display: inline-block;
+  height: 6em;
+  width: 5em;
+  // background-color: lightgray;
+  margin: 0.25em;
+}
+
+.hand-builder-spacer {
+  display: inline-block;
+  width: 2em;
+}
+
+.hand-builder-tile-image {
+  height: auto;
+  width: 6em;
+  left: -7px;
+  position: relative;
+}
+
+.ripple-container {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}

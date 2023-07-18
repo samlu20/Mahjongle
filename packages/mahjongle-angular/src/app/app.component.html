@@ -15,11 +15,14 @@
 
 <mat-drawer-container class="app-container" autosize>
   <mat-drawer #drawer class="app-sidenav" mode="side">
-    <p>Sidenav</p>
+    <!-- <p>Sidenav</p> -->
+    <app-menu [(activeRoute)]="currentRoute"></app-menu>
   </mat-drawer>
 
   <div class="app-sidenav-content">
-    <p>Content</p>
-    <router-outlet></router-outlet>
+    <!-- <p>Content</p> -->
+    <div class="app-content">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </mat-drawer-container>

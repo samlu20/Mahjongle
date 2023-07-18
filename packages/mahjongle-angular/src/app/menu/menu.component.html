@@ -1,0 +1,10 @@
+<p>menu works!</p>
+<mat-nav-list>
+  <ng-container *ngFor="let link of linkArray">
+    <mat-list-item [routerLink]="link.route">
+      <mat-icon>{{link.icon}}</mat-icon>
+      {{link.title}}
+    </mat-list-item>
+    <!-- <a mat-menu-item [routerLink]="link.route" routerLinkActive="active-link">{{link.title}}</a> -->
+  </ng-container>
+</mat-nav-list>

@@ -8,9 +8,11 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-mahjongle';
+  title: string = 'angular-mahjongle';
+  currentRoute: string;
 
   constructor(private http: HttpClient) {
+    this.currentRoute = '\\';
   }
 
   ngOnInit() {

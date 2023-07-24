@@ -8,7 +8,7 @@
   <div class="hand-builder-inner-container">
     
     <ng-container *ngIf="isGrouped">
-      <div class="hand-builder-tile-group ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile-group ripple-container" matRipple (click)="openTilePickerDialog(0)">
         <div class="hand-builder-tile">
           <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[0].key}}.png" />
         </div>
@@ -20,7 +20,7 @@
         </div>
       </div>
       <span class="hand-builder-spacer"></span>
-      <div class="hand-builder-tile-group ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile-group ripple-container" matRipple (click)="openTilePickerDialog(3)">
         <div class="hand-builder-tile">
           <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[3].key}}.png" />
         </div>
@@ -32,7 +32,7 @@
         </div>
       </div>
       <span class="hand-builder-spacer"></span>
-      <div class="hand-builder-tile-group ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile-group ripple-container" matRipple (click)="openTilePickerDialog(6)">
         <div class="hand-builder-tile">
           <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[6].key}}.png" />
         </div>
@@ -44,49 +44,70 @@
         </div>
       </div>
       <span class="hand-builder-spacer"></span>
-      <div class="hand-builder-tile-group ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile-group ripple-container" matRipple (click)="openTilePickerDialog(9)">
         <div class="hand-builder-tile">
           <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[9].key}}.png" />
         </div>
         <div class="hand-builder-tile">
           <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[10].key}}.png" />
         </div>
+        <div class="hand-builder-tile">
+          <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[11].key}}.png" />
+        </div>
+      </div>
+      <span class="hand-builder-spacer"></span>
+      <div class="hand-builder-tile-group ripple-container" matRipple (click)="openTilePickerDialog(12)">
+        <div class="hand-builder-tile">
+          <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[12].key}}.png" />
+        </div>
+        <div class="hand-builder-tile">
+          <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[13].key}}.png" />
+        </div>
       </div>
     </ng-container>
 
     <ng-container *ngIf="!isGrouped">
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(0)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[0].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(1)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[1].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(2)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[2].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(3)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[3].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(4)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[4].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(5)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[5].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(6)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[6].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(7)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[7].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(8)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[8].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(9)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[9].key}}.png" />
       </div>
-      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePicker()">
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(10)">
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[10].key}}.png" />
+      </div>
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(11)">
+        <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[11].key}}.png" />
+      </div>
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(12)">
+        <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[12].key}}.png" />
+      </div>
+      <div class="hand-builder-tile ripple-container" matRipple (click)="openTilePickerDialog(13)">
+        <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[13].key}}.png" />
       </div>
     </ng-container>
 

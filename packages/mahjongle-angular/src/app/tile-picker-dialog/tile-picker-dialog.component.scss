@@ -1,0 +1,52 @@
+#tile-picker-dialog-annotation {
+  width: 100%;
+  text-align: left;
+  font-size: small;
+}
+
+.tile-picker-container {
+  padding: 1em;
+  width: 27em;
+  height: 30em;
+  text-align: center;
+}
+
+.tile-picker-group-content {
+  padding: 1em;
+}
+
+.tile-picker-suit-button {
+  min-height: 5em;
+  min-width: 9em;
+  margin: 5px;
+}
+
+.tile-picker-tile-image {
+  height: auto;
+  width: 6em;
+  left: -7px;
+  position: relative;
+}
+
+.tile-picker-tile-spacer {
+  width: 6em;
+  display: inline-block;
+}
+
+.tile-picker-tile-group-container {
+  display: block;
+}
+
+.tile-picker-tile-group {
+  display: inline-block;
+}
+
+.ripple-container {
+  cursor: pointer;
+  display: inline-block;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}

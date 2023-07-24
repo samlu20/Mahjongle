@@ -1,0 +1,94 @@
+<div class="tile-picker-container">
+  <mat-dialog-content class="mat-typography">
+    <mat-tab-group [(selectedIndex)]="tabIndex">
+      <mat-tab label="Suit">
+        <div class="tile-picker-group-content">
+          <button class="tile-picker-suit-button" mat-raised-button 
+            (click)="onSuitButtonClicked('bamboo')">Bamboo<br />(索子)</button>
+          <button class="tile-picker-suit-button" mat-raised-button 
+            (click)="onSuitButtonClicked('dot')">Circles<br />(筒子)</button>
+          <button class="tile-picker-suit-button" mat-raised-button 
+            (click)="onSuitButtonClicked('character')">Characters<br />(萬子)</button>
+          <button class="tile-picker-suit-button" mat-raised-button 
+            (click)="onSuitButtonClicked('wind')">Winds<br />(四喜牌)</button>
+          <button class="tile-picker-suit-button" mat-raised-button 
+            (click)="onSuitButtonClicked('dragon')">Dragons<br />(三元牌)</button>
+        </div>
+      </mat-tab>
+      <mat-tab label="Tile">
+        <div class="tile-picker-group-content">
+          <ng-container *ngIf="!isCurrentSuitHonor">
+            <div class="ripple-container" matRipple (click)="onTileClicked('1')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/1{{currentSuitCode}}.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('2')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/2{{currentSuitCode}}.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('3')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/3{{currentSuitCode}}.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('4')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/4{{currentSuitCode}}.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('5')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/5{{currentSuitCode}}.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('6')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/6{{currentSuitCode}}.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('7')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/7{{currentSuitCode}}.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('8')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/8{{currentSuitCode}}.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('9')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/9{{currentSuitCode}}.png" />
+            </div>
+          </ng-container>
+          <ng-container *ngIf="currentSuit === 'wind'">
+            <div class="ripple-container" matRipple (click)="onTileClicked('W')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/WW.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('N')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/NW.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('E')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/EW.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('S')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/SW.png" />
+            </div>
+          </ng-container>
+          <ng-container *ngIf="currentSuit === 'dragon'">
+            <div class="ripple-container" matRipple (click)="onTileClicked('R')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/RD.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('G')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/GD.png" />
+            </div>
+            <div class="ripple-container" matRipple (click)="onTileClicked('W')">
+              <img class="tile-picker-tile-image" src="../../assets/images/tiles/WD.png" />
+            </div>
+          </ng-container>
+        </div>
+      </mat-tab>
+      <mat-tab label="Group" *ngIf="isGrouped">
+        <div class="tile-picker-group-content">
+          <div class="ripple-container tile-picker-tile-group-container" matRipple 
+            *ngFor="let group of tileCodeGroupArray; let last = last" (click)="onGroupClick(group)">
+            <div class="tile-picker-tile-group" *ngFor="let tileCode of group">
+              <img class="tile-picker-tile-image" style="margin: 1em 0em 1em 0em;" src="../../assets/images/tiles/{{tileCode}}.png" />
+              <mat-divider *ngIf="!last"></mat-divider>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div id="tile-picker-dialog-annotation">To select tiles individually, please close this window and toggle the "group tiles" option</div>
+  </mat-dialog-content>
+
+
+</div>
+

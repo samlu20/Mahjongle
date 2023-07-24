@@ -5,11 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,6 +26,7 @@ import { TestDirective } from './shared/test.directive';
 import { HandBuilderComponent } from './hand-builder/hand-builder.component';
 import { MenuComponent } from './menu/menu.component';
 import { TilePickerDialogComponent } from './tile-picker-dialog/tile-picker-dialog.component';
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,18 +36,24 @@ import { TilePickerDialogComponent } from './tile-picker-dialog/tile-picker-dial
     HandBuilderComponent,
     MenuComponent,
     TilePickerDialogComponent,
+    HelpDialogComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    BrowserModule,
     HttpClientModule,
     MatButtonModule,
     MatCardModule,
+    MatCheckboxModule,
     MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
     MatRippleModule,
+    MatSelectModule,
     MatSlideToggleModule,
     MatTabsModule,
     MatToolbarModule,

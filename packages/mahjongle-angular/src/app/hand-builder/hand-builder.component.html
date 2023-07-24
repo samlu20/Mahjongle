@@ -1,4 +1,4 @@
-<mat-card class="hand-builder-card">
+<mat-card id="hand-builder-hand-card">
   <div class="hand-builder-toolbar">
     <mat-slide-toggle [checked]="isGrouped" (change)="toggleGroup($event)">
       Group tiles
@@ -110,6 +110,93 @@
         <img class="hand-builder-tile-image" src="../../assets/images/tiles/{{hand[13].key}}.png" />
       </div>
     </ng-container>
-
   </div>
+</mat-card>
+
+<mat-card id="hand-builder-options-card">
+  <div class="hand-builder-hand-table-container">
+    <table class="hand-builder-hand-table">
+      <tr>
+        <mat-form-field>
+          <mat-label>Number of Flower Tile(s)</mat-label>
+          <mat-select [(value)]="flowerTileCount">
+            <mat-option [value]="0" selected>0</mat-option>
+            <mat-option [value]="1">1</mat-option>
+            <mat-option [value]="2">2</mat-option>
+            <mat-option [value]="3">3</mat-option>
+            <mat-option [value]="4">4</mat-option>
+            <mat-option [value]="5">5</mat-option>
+            <mat-option [value]="6">6</mat-option>
+            <mat-option [value]="7">7</mat-option>
+            <mat-option [value]="8">8</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </tr>
+    </table>
+
+    <table class="hand-builder-hand-table">
+      <div>
+        <mat-checkbox [checked]="isSingleWait">Single Wait</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Single Wait','(1 point) Includes Edge, Closed, and Single Waits.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isSeatWind">Seat Wind</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Seat Wind','(2 points) Hand includes a pung (or kong) of the player’s seat wind.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isPrevalentWind">Prevalent Wind</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Prevalent Wind','(2 points) Hand includes a pung (or kong) of the prevalent wind.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isLastOfKind">Last of its kind</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Last of its kind','(4 points) This must be clear based on the visible discards, melds, and the winning player’s hand.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isLastTile">Last Tile Draw</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Last Tile Draw','(8 points) Includes winning on last wall tile or last discarded tile.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isReplacementTile">Out with Replacement Tile</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Out with Replacement Tile','(8 points) Winning on the replacement tile drawn after declaring a kong. Counts as self-drawn.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isRobbingKong">Robbing the Kong</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Robbing the Kong','(8 points) Winning off the tile that somebody adds to a melded pung.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isMeldedHand">Melded hand</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Melded hand','(6 points) Hand includes four melded sets and is won by discard.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isConcealedHandDiscard">Concealed hand (won off discard)</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Concealed hand (won off discard)','(2 points) Hand includes four concealed sets and is won by discard.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+
+      <tr>
+        <mat-checkbox [checked]="isConcealedHandSelf">Concealed hand (won by self-draw)</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Concealed hand (won by self-draw)','(4 points) Hand consists entirely of concealed sets and is won by self-draw.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </tr>
+    </table>
+  </div>
+  
 </mat-card>

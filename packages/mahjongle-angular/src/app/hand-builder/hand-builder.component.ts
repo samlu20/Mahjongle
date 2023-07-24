@@ -3,7 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Tile } from '../../models/tile.model';
 import { TilePickerDialogData } from '../../models/tile-picker-dialog-data.model';
+import { HelpDialogData } from '../../models/help-dialog-data.model';
 import { TilePickerDialogComponent } from '../tile-picker-dialog/tile-picker-dialog.component';
+import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 
 @Component({
   selector: 'app-hand-builder',
@@ -14,7 +16,20 @@ export class HandBuilderComponent {
 
   hand: Array<Tile> = new Array(13);
   isGrouped: boolean = true;
-  // isTilePickerOpen: boolean = true;
+
+  // Hand info
+  // TODO: Turn this into a model
+  flowerTileCount: number = 0;
+  isSingleWait: boolean = false;
+  isSeatWind: boolean = false;
+  isPrevalentWind: boolean = false;
+  isLastOfKind: boolean = false;
+  isLastTile: boolean = false;
+  isReplacementTile: boolean = false;
+  isRobbingKong: boolean = false;
+  isMeldedHand: boolean = false;
+  isConcealedHandDiscard: boolean = false;
+  isConcealedHandSelf: boolean = false;
 
   constructor(private dialog: MatDialog) {
     this.hand[0] = new Tile('1D');
@@ -57,6 +72,16 @@ export class HandBuilderComponent {
         const index = this.isGrouped ? handIndex + i : handIndex;
         this.hand[index] = new Tile(result[i]);
       }
+    });
+  }
+
+  openHelpDialog(title: string, content: string): void {
+    this.dialog.open(HelpDialogComponent, {
+      data: {
+        title: title,
+        content: content
+      } as HelpDialogData,
+      exitAnimationDuration: 500
     });
   }
 

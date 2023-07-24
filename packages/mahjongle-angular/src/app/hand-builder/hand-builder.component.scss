@@ -1,10 +1,16 @@
 // TODO: Add queries for mobile size
-.hand-builder-card {
-  height: 25%;
+#hand-builder-hand-card {
+  // height: 25%;
   min-height: 15em;
-  max-height: 25em;
+  // max-height: 25em;
+  width: 100%;
+  padding: 1em 2em;
+}
+
+#hand-builder-options-card {
   width: 100%;
   padding: 1em;
+  margin-top: 1em;
 }
 
 .hand-builder-toolbar {
@@ -38,6 +44,18 @@
   width: 6em;
   left: -7px;
   position: relative;
+}
+
+.hand-builder-hand-table-container {
+  width: 100%;
+  text-align: center;
+  padding: 2em;
+}
+
+.hand-builder-hand-table {
+  display: inline-table;
+  width: 30em;
+  text-align: left;
 }
 
 .ripple-container {

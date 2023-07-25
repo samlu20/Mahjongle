@@ -1,8 +1,21 @@
 <mat-card id="hand-builder-hand-card">
   <div class="hand-builder-toolbar">
-    <mat-slide-toggle [checked]="isGrouped" (change)="toggleGroup($event)">
+    <mat-slide-toggle style="vertical-align: super;" [checked]="isGrouped" (change)="toggleGroup($event)">
       Group tiles
     </mat-slide-toggle>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="resetHand()">
+        <mat-icon>undo</mat-icon>
+        <span>Reset</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
   </div>
 
   <div class="hand-builder-inner-container">
@@ -154,8 +167,26 @@
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isLastOfKind">Last of its kind</mat-checkbox>
-        <button mat-icon-button color="primary" (click)="openHelpDialog('Last of its kind','(4 points) This must be clear based on the visible discards, melds, and the winning player’s hand.')">
+        <mat-checkbox [checked]="isConcealedHandDiscard">Concealed Hand (won off discard)</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Concealed Hand (won off discard)','(2 points) Hand includes four concealed sets and is won by discard.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isConcealedHandSelf">Concealed Hand (won by self-draw)</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Concealed Hand (won by self-draw)','(4 points) Hand consists entirely of concealed sets and is won by self-draw.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isLastOfKind">Last of Its Kind</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Last of Its Kind','(4 points) This must be clear based on the visible discards, melds, and the winning player’s hand.')">
+          <mat-icon>info</mat-icon>
+        </button>
+      </div>
+      <div>
+        <mat-checkbox [checked]="isMeldedHand">Melded Hand</mat-checkbox>
+        <button mat-icon-button color="primary" (click)="openHelpDialog('Melded Hand','(6 points) Hand includes four melded sets and is won by discard.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
@@ -177,26 +208,10 @@
           <mat-icon>info</mat-icon>
         </button>
       </div>
-      <div>
-        <mat-checkbox [checked]="isMeldedHand">Melded hand</mat-checkbox>
-        <button mat-icon-button color="primary" (click)="openHelpDialog('Melded hand','(6 points) Hand includes four melded sets and is won by discard.')">
-          <mat-icon>info</mat-icon>
-        </button>
-      </div>
-      <div>
-        <mat-checkbox [checked]="isConcealedHandDiscard">Concealed hand (won off discard)</mat-checkbox>
-        <button mat-icon-button color="primary" (click)="openHelpDialog('Concealed hand (won off discard)','(2 points) Hand includes four concealed sets and is won by discard.')">
-          <mat-icon>info</mat-icon>
-        </button>
-      </div>
-
-      <tr>
-        <mat-checkbox [checked]="isConcealedHandSelf">Concealed hand (won by self-draw)</mat-checkbox>
-        <button mat-icon-button color="primary" (click)="openHelpDialog('Concealed hand (won by self-draw)','(4 points) Hand consists entirely of concealed sets and is won by self-draw.')">
-          <mat-icon>info</mat-icon>
-        </button>
-      </tr>
     </table>
+  </div>
+  <div>
+    <button id="hand-builder-submit-button" mat-raised-button color="primary" [disabled]="isSubmitButtonDisabled">Submit</button>
   </div>
   
 </mat-card>

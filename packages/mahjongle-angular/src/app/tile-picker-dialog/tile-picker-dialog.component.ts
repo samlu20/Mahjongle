@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { Tile } from '../../models/tile.model';
 import { TilePickerDialogData } from '../../models/tile-picker-dialog-data.model';
 
 
@@ -12,9 +11,9 @@ import { TilePickerDialogData } from '../../models/tile-picker-dialog-data.model
 })
 export class TilePickerDialogComponent {
 
-  currentTileValue: string = '1';
-  currentSuit: string = 'bamboo';
-  currentSuitCode: string = 'B';
+  currentTileValue: string = '';
+  currentSuit: string = '';
+  currentSuitCode: string = '';
   isCurrentSuitHonor: boolean = false;
   isGrouped: boolean = true;
   isDouble: boolean = false;
@@ -42,6 +41,7 @@ export class TilePickerDialogComponent {
       this.isCurrentSuitHonor = false;
 
     this.tabIndex = 1;
+    this.currentTileValue = ''; // Prevents showing groups of previously selected value
   }
 
   onTileClicked(tileValue: string): void {

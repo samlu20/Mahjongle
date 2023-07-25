@@ -15,7 +15,9 @@ import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 export class HandBuilderComponent {
 
   hand: Array<Tile> = new Array(13);
+  defaultHand: Array<Tile>;
   isGrouped: boolean = true;
+  isSubmitButtonDisabled: boolean = true;
 
   // Hand info
   // TODO: Turn this into a model
@@ -32,24 +34,28 @@ export class HandBuilderComponent {
   isConcealedHandSelf: boolean = false;
 
   constructor(private dialog: MatDialog) {
-    this.hand[0] = new Tile('1D');
-    this.hand[1] = new Tile('2D');
-    this.hand[2] = new Tile('3D');
+    this.hand[0] = new Tile('Back');
+    this.hand[1] = new Tile('Back');
+    this.hand[2] = new Tile('Back');
 
-    this.hand[3] = new Tile('4B');
-    this.hand[4] = new Tile('5B');
-    this.hand[5] = new Tile('6B');
+    this.hand[3] = new Tile('Back');
+    this.hand[4] = new Tile('Back');
+    this.hand[5] = new Tile('Back');
 
-    this.hand[6] = new Tile('7C');
-    this.hand[7] = new Tile('8C');
-    this.hand[8] = new Tile('9C');
+    this.hand[6] = new Tile('Back');
+    this.hand[7] = new Tile('Back');
+    this.hand[8] = new Tile('Back');
 
-    this.hand[9] = new Tile('1C');
-    this.hand[10] = new Tile('2C');
-    this.hand[11] = new Tile('3C');
+    this.hand[9] = new Tile('Back');
+    this.hand[10] = new Tile('Back');
+    this.hand[11] = new Tile('Back');
 
-    this.hand[12] = new Tile('NW');
-    this.hand[13] = new Tile('NW');
+    this.hand[12] = new Tile('Back');
+    this.hand[13] = new Tile('Back');
+
+    this.defaultHand = [...this.hand];
+
+    // TODO: Eventually be able to take in a hand
   }
 
   toggleGroup(e: any) {
@@ -66,12 +72,11 @@ export class HandBuilderComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-
       for (let i = 0; i < result.length; i++) {
         const index = this.isGrouped ? handIndex + i : handIndex;
         this.hand[index] = new Tile(result[i]);
       }
+      this.updateSubmitButton();
     });
   }
 
@@ -85,4 +90,19 @@ export class HandBuilderComponent {
     });
   }
 
+  updateSubmitButton(): void {
+    for (let tile of this.hand) {
+      if (tile.key === 'Back' || tile.key === 'Invalid') {
+        this.isSubmitButtonDisabled = true;
+        return;
+      }
+    }
+
+    this.isSubmitButtonDisabled = false;
+  }
+
+  resetHand(): void {
+    this.hand = this.defaultHand;
+    this.updateSubmitButton();
+  }
 }

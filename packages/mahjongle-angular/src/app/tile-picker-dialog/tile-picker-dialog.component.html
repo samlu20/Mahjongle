@@ -73,7 +73,7 @@
           </ng-container>
         </div>
       </mat-tab>
-      <mat-tab label="Group" *ngIf="isGrouped">
+      <mat-tab label="Group" *ngIf="isGrouped" [disabled]="!currentTileValue">
         <div class="tile-picker-group-content">
           <div class="ripple-container tile-picker-tile-group-container" matRipple 
             *ngFor="let group of tileCodeGroupArray; let last = last" (click)="onGroupClick(group)">

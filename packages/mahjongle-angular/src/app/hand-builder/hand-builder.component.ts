@@ -2,10 +2,21 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Tile } from '../../models/tile.model';
+import { TileEnum } from '../../models/tile-enums.model';
 import { TilePickerDialogData } from '../../models/tile-picker-dialog-data.model';
+import { TilePickerDialogResult } from '../../models/tile-picker-dialog-result.model';
 import { HelpDialogData } from '../../models/help-dialog-data.model';
 import { TilePickerDialogComponent } from '../tile-picker-dialog/tile-picker-dialog.component';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
+
+interface GroupInformation {
+  tileKeyArray: Array<string>;
+  isKong: boolean;
+  isConcealed: boolean;
+};
+
+const WINNING_HAND_SIZE = 13;
+const NORMAL_HAND_SIZE = 12;
 
 @Component({
   selector: 'app-hand-builder',
@@ -32,6 +43,7 @@ export class HandBuilderComponent {
   isMeldedHand: boolean = false;
   isConcealedHandDiscard: boolean = false;
   isConcealedHandSelf: boolean = false;
+  private handGroupInformation: Array<GroupInformation> = [];
 
   constructor(private dialog: MatDialog) {
     this.hand[0] = new Tile('Back');
@@ -71,11 +83,21 @@ export class HandBuilderComponent {
       exitAnimationDuration: 500
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      for (let i = 0; i < result.length; i++) {
+    dialogRef.afterClosed().subscribe((result: TilePickerDialogResult) => {
+      result.tileKeyArray.forEach((tileKey, index) => {
+
+
+      });
+      for (let i = 0; i < result.tileKeyArray.length; i++) {
         const index = this.isGrouped ? handIndex + i : handIndex;
-        this.hand[index] = new Tile(result[i]);
+        this.hand[index] = new Tile(result.tileKeyArray[i]);
       }
+
+      if (this.isGrouped) {
+        const groupIndex: number = Math.floor(handIndex / 3);
+        this.handGroupInformation[groupIndex] = result as GroupInformation;
+      }
+
       this.updateSubmitButton();
     });
   }

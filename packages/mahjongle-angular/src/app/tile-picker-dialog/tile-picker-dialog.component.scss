@@ -28,6 +28,13 @@
   position: relative;
 }
 
+.tile-picker-tile-image-small {
+  height: auto;
+  width: 4em;
+  left: -7px;
+  position: relative;
+}
+
 .tile-picker-tile-spacer {
   width: 6em;
   display: inline-block;
@@ -35,6 +42,7 @@
 
 .tile-picker-tile-group-container {
   display: block;
+  width: 100%;
 }
 
 .tile-picker-tile-group {
@@ -49,4 +57,11 @@
   -moz-user-select: none;
   -webkit-user-drag: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+.concealed-icon {
+  width: 100%;
+  display: block;
+  position: absolute;
+  text-align: right;
 }

@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { TilePickerDialogData } from '../../models/tile-picker-dialog-data.model';
+import { TilePickerDialogResult } from '../../models/tile-picker-dialog-result.model';
 
 
 @Component({
@@ -14,11 +15,15 @@ export class TilePickerDialogComponent {
   currentTileValue: string = '';
   currentSuit: string = '';
   currentSuitCode: string = '';
+
   isCurrentSuitHonor: boolean = false;
   isGrouped: boolean = true;
   isDouble: boolean = false;
+
   tabIndex: number = 0;
   tileCodeGroupArray: Array<Array<string>> = [];
+  tripleGroup: Array<string> = [];
+  quadrupleGroup: Array<string> = [];
 
   constructor(public dialogRef: MatDialogRef<TilePickerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TilePickerDialogData,) {
@@ -54,7 +59,7 @@ export class TilePickerDialogComponent {
       this.updateTileCodeGroupArray();
     } else {
       // this.tabIndex = 0;
-      this.dialogRef.close([ tileValue + this.currentSuitCode + '' ]);
+      this.dialogRef.close([ this.currentSuitCode + tileValue + '' ]);
       // TODO: Send data back
     }
   }
@@ -64,12 +69,12 @@ export class TilePickerDialogComponent {
     this.tileCodeGroupArray = [];
 
     if (this.isDouble) {
-      this.tileCodeGroupArray.push(new Array(2).fill(this.currentTileValue + this.currentSuitCode + ''));
+      this.tileCodeGroupArray.push(new Array(2).fill(this.currentSuitCode + this.currentTileValue + ''));
       return;
     }
 
     if (this.currentSuit === 'dragon' || this.currentSuit === 'wind') {
-      this.tileCodeGroupArray.push(new Array(3).fill(this.currentTileValue + this.currentSuitCode + ''));
+      this.tileCodeGroupArray.push(new Array(3).fill(this.currentSuitCode + this.currentTileValue + ''));
       // this.tileCodeGroupArray.push(new Array(4).fill(this.currentTileValue + this.currentSuitCode + ''));
       // TODO: Consider layout for group of 4 (possibly add checkbox in hand-builder component instead)
       return;
@@ -79,31 +84,34 @@ export class TilePickerDialogComponent {
 
     if (numberValue < 8) {
       let group: Array<string> = [ '0', '1', '2' ];
-      this.tileCodeGroupArray.push(group.map(n => Number(n) + numberValue + this.currentSuitCode + ''));
+      this.tileCodeGroupArray.push(group.map(n => this.currentSuitCode + (Number(n) + numberValue) + ''));
       
     }
     
     if (numberValue > 1 && numberValue < 9) {
       let group: Array<string> = [ '-1', '0', '1' ];
-      this.tileCodeGroupArray.push(group.map(n => Number(n) + numberValue + this.currentSuitCode + ''));
+      this.tileCodeGroupArray.push(group.map(n => this.currentSuitCode + (Number(n) + numberValue) + ''));
     }
 
     if (numberValue > 2) {
       let group: Array<string> = [ '-2', '-1', '0' ];
-      this.tileCodeGroupArray.push(group.map(n => Number(n) + numberValue + this.currentSuitCode + ''));
+      this.tileCodeGroupArray.push(group.map(n => this.currentSuitCode + (Number(n) + numberValue) + ''));
     }
 
-    this.tileCodeGroupArray.push(new Array(3).fill(this.currentTileValue + this.currentSuitCode + ''));
+    this.tileCodeGroupArray.push(new Array(3).fill(this.currentSuitCode + this.currentTileValue + ''));
 
     // TODO: Consider layout for group of 4 (possibly add checkbox in hand-builder component instead)
     // this.tileCodeGroupArray.push(new Array(4).fill(this.currentTileValue + this.currentSuitCode + ''));
+    this.tripleGroup = new Array(3).fill(this.currentSuitCode + this.currentTileValue + '');
+    this.quadrupleGroup = new Array(4).fill(this.currentSuitCode + this.currentTileValue + '');
   }
 
-  onGroupClick(tileCodeArray: Array<string>): void {
-    // console.log(tileCodeArray);
-    // this.tabIndex = 0;
-    this.dialogRef.close(tileCodeArray);
-    // TODO: Send data back
+  onGroupClick(tileCodeArray: Array<string>, concealed?: boolean): void {
+    this.dialogRef.close({
+      tileKeyArray: tileCodeArray.slice(0,3),
+      isConcealed: !!concealed,
+      isKong: tileCodeArray.length === 4
+    } as TilePickerDialogResult);
   }
 
 }

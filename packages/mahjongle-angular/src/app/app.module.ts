@@ -22,12 +22,14 @@ import { MatDrawerContainer, MatSidenavModule } from '@angular/material/sidenav'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HandBuilderComponent } from './hand-builder/hand-builder.component';
+import { HelpDialogComponent } from './help-dialog/help-dialog.component';
+import { MenuComponent } from './menu/menu.component';
 import { TileDirective } from './shared/tile.directive';
 import { TestDirective } from './shared/test.directive';
-import { HandBuilderComponent } from './hand-builder/hand-builder.component';
-import { MenuComponent } from './menu/menu.component';
+import { TileHandService } from './services/tile-hand.service';
 import { TilePickerDialogComponent } from './tile-picker-dialog/tile-picker-dialog.component';
-import { HelpDialogComponent } from './help-dialog/help-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -61,7 +63,10 @@ import { HelpDialogComponent } from './help-dialog/help-dialog.component';
     MatToolbarModule,
     MatSidenavModule,
   ],
-  providers: [ MatDrawerContainer ],
+  providers: [ 
+    MatDrawerContainer,
+    TileHandService, 
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

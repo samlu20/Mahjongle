@@ -1,3 +1,21 @@
+export class TileHand {
+  tileGroupArray: Array<TileGroup> = [];
+
+  constructor(tileGroupArrayIn?: Array<TileGroup>) {
+    this.tileGroupArray = tileGroupArrayIn ?? [];
+  }
+}
+
+export class TileGroup {
+  tileKeyArray: Array<string> = [];
+  isConcealed: boolean = false;
+
+  constructor(tileKeyArrayIn?: Array<string>, isConcealed?: boolean) {
+    this.tileKeyArray = tileKeyArrayIn ?? [];
+    this.isConcealed = isConcealed ?? false;
+  }
+}
+
 export class Tile {
 
   readonly key: string;

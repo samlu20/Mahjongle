@@ -17,8 +17,8 @@ export class TilePickerDialogComponent {
   currentSuitCode: string = '';
 
   isCurrentSuitHonor: boolean = false;
-  isGrouped: boolean = true;
-  isDouble: boolean = false;
+  doSuggest: boolean = true;
+  doAdd: boolean = false;
 
   tabIndex: number = 0;
   tileCodeGroupArray: Array<Array<string>> = [];
@@ -28,8 +28,8 @@ export class TilePickerDialogComponent {
   constructor(public dialogRef: MatDialogRef<TilePickerDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TilePickerDialogData,) {
 
-    this.isGrouped = data.isGrouped;
-    this.isDouble = data.isDouble;
+    this.doSuggest = data.doSuggest;
+    this.doAdd = data.doAdd;
   }
 
   onSuitButtonClicked(suit: string): void {
@@ -38,7 +38,7 @@ export class TilePickerDialogComponent {
       return;
 
     this.currentSuit = suit;
-    this.currentSuitCode = suit[0].toUpperCase();
+    this.currentSuitCode = suit.toLowerCase() === 'dragon' ? 'R' : suit[0].toUpperCase();
 
     if (suit === 'dragon' || suit === 'wind')
       this.isCurrentSuitHonor = true;
@@ -54,13 +54,15 @@ export class TilePickerDialogComponent {
     // Validate tile value
     this.currentTileValue = tileValue;
 
-    if (this.isGrouped) {
+    if (this.doSuggest) {
       this.tabIndex = 2;
       this.updateTileCodeGroupArray();
     } else {
-      // this.tabIndex = 0;
-      this.dialogRef.close([ this.currentSuitCode + tileValue + '' ]);
-      // TODO: Send data back
+      // this.dialogRef.close([ String(this.currentSuitCode + tileValue) ]);
+      this.dialogRef.close({
+        tileKeyArray: [ String(this.currentSuitCode + tileValue) ],
+        isConcealed: false,
+      } as TilePickerDialogResult);
     }
   }
 
@@ -68,50 +70,49 @@ export class TilePickerDialogComponent {
 
     this.tileCodeGroupArray = [];
 
-    if (this.isDouble) {
-      this.tileCodeGroupArray.push(new Array(2).fill(this.currentSuitCode + this.currentTileValue + ''));
-      return;
-    }
+    this.tileCodeGroupArray.push(new Array(1).fill(String(this.currentSuitCode + this.currentTileValue)));
+    this.tileCodeGroupArray.push(new Array(2).fill(String(this.currentSuitCode + this.currentTileValue)));
 
-    if (this.currentSuit === 'dragon' || this.currentSuit === 'wind') {
-      this.tileCodeGroupArray.push(new Array(3).fill(this.currentSuitCode + this.currentTileValue + ''));
-      // this.tileCodeGroupArray.push(new Array(4).fill(this.currentTileValue + this.currentSuitCode + ''));
-      // TODO: Consider layout for group of 4 (possibly add checkbox in hand-builder component instead)
-      return;
-    }
 
-    const numberValue: number = Number(this.currentTileValue);
+    if (this.currentSuit !== 'dragon' && this.currentSuit !== 'wind') {
+      const numberValue: number = Number(this.currentTileValue);
 
-    if (numberValue < 8) {
-      let group: Array<string> = [ '0', '1', '2' ];
-      this.tileCodeGroupArray.push(group.map(n => this.currentSuitCode + (Number(n) + numberValue) + ''));
+      if (numberValue < 8) {
+        let group: Array<string> = [ '0', '1', '2' ];
+        this.tileCodeGroupArray.push(group.map(n => String(this.currentSuitCode + (Number(n) + numberValue))));
+        
+      }
       
-    }
-    
-    if (numberValue > 1 && numberValue < 9) {
-      let group: Array<string> = [ '-1', '0', '1' ];
-      this.tileCodeGroupArray.push(group.map(n => this.currentSuitCode + (Number(n) + numberValue) + ''));
+      if (numberValue > 1 && numberValue < 9) {
+        let group: Array<string> = [ '-1', '0', '1' ];
+        this.tileCodeGroupArray.push(group.map(n => String(this.currentSuitCode + (Number(n) + numberValue))));
+      }
+
+      if (numberValue > 2) {
+        let group: Array<string> = [ '-2', '-1', '0' ];
+        this.tileCodeGroupArray.push(group.map(n => String(this.currentSuitCode + (Number(n) + numberValue))));
+      }
     }
 
-    if (numberValue > 2) {
-      let group: Array<string> = [ '-2', '-1', '0' ];
-      this.tileCodeGroupArray.push(group.map(n => this.currentSuitCode + (Number(n) + numberValue) + ''));
-    }
-
-    this.tileCodeGroupArray.push(new Array(3).fill(this.currentSuitCode + this.currentTileValue + ''));
-
-    // TODO: Consider layout for group of 4 (possibly add checkbox in hand-builder component instead)
-    // this.tileCodeGroupArray.push(new Array(4).fill(this.currentTileValue + this.currentSuitCode + ''));
-    this.tripleGroup = new Array(3).fill(this.currentSuitCode + this.currentTileValue + '');
-    this.quadrupleGroup = new Array(4).fill(this.currentSuitCode + this.currentTileValue + '');
+    this.tileCodeGroupArray.push(new Array(3).fill(String(this.currentSuitCode + this.currentTileValue)));
+    this.tripleGroup = new Array(3).fill(String(this.currentSuitCode + this.currentTileValue));
+    this.quadrupleGroup = new Array(4).fill(String(this.currentSuitCode + this.currentTileValue));
   }
 
   onGroupClick(tileCodeArray: Array<string>, concealed?: boolean): void {
     this.dialogRef.close({
-      tileKeyArray: tileCodeArray.slice(0,3),
-      isConcealed: !!concealed,
-      isKong: tileCodeArray.length === 4
+      tileKeyArray: tileCodeArray,
+      isConcealed: !!concealed
     } as TilePickerDialogResult);
+  }
+
+  onDeleteClick() {
+    this.dialogRef.close({
+      doDelete: true
+    } as TilePickerDialogResult);
+  }
+  onCloseClick() {
+    this.dialogRef.close();
   }
 
 }

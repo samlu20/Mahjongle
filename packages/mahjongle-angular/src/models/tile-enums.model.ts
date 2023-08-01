@@ -37,4 +37,7 @@ export enum TileEnum {
   characterSeven = 'C7',
   characterEight = 'C8',
   characterNine = 'C9',
+
+  back = 'Back',
+  invalid = 'Invalid'
 }

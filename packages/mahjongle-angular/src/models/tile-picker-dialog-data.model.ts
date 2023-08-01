@@ -1,4 +1,4 @@
 export interface TilePickerDialogData {
-  isGrouped: boolean;
-  isDouble: boolean;
+  doSuggest: boolean;
+  doAdd: boolean;
 }

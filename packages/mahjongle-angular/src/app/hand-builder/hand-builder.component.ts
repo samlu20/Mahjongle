@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Tile } from '../../models/tile.model';
+import { Tile, TileGroup, TileHand } from '../../models/tile.model';
 import { TileEnum } from '../../models/tile-enums.model';
 import { TilePickerDialogData } from '../../models/tile-picker-dialog-data.model';
 import { TilePickerDialogResult } from '../../models/tile-picker-dialog-result.model';
@@ -25,15 +25,17 @@ const NORMAL_HAND_SIZE = 12;
 })
 export class HandBuilderComponent {
 
-  hand: Array<Tile> = new Array(13);
-  defaultHand: Array<Tile>;
-  isGrouped: boolean = true;
+  hand: TileHand = new TileHand();
+  defaultHand: TileHand = new TileHand();
+
+  doSuggest: boolean = true;
   isSubmitButtonDisabled: boolean = true;
 
   // Hand info
   // TODO: Turn this into a model
   flowerTileCount: number = 0;
   isSingleWait: boolean = false;
+  isSingleWaitDisabled: boolean = false;
   isSeatWind: boolean = false;
   isPrevalentWind: boolean = false;
   isLastOfKind: boolean = false;
@@ -46,59 +48,52 @@ export class HandBuilderComponent {
   private handGroupInformation: Array<GroupInformation> = [];
 
   constructor(private dialog: MatDialog) {
-    this.hand[0] = new Tile('Back');
-    this.hand[1] = new Tile('Back');
-    this.hand[2] = new Tile('Back');
-
-    this.hand[3] = new Tile('Back');
-    this.hand[4] = new Tile('Back');
-    this.hand[5] = new Tile('Back');
-
-    this.hand[6] = new Tile('Back');
-    this.hand[7] = new Tile('Back');
-    this.hand[8] = new Tile('Back');
-
-    this.hand[9] = new Tile('Back');
-    this.hand[10] = new Tile('Back');
-    this.hand[11] = new Tile('Back');
-
-    this.hand[12] = new Tile('Back');
-    this.hand[13] = new Tile('Back');
-
-    this.defaultHand = [...this.hand];
+    this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
+    // this.handGroup.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
+    // this.handGroup.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
+    // this.handGroup.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
+    // this.handGroup.tileGroupArray.push(new TileGroup(new Array(2).fill('Back')));
+    this.defaultHand = {...this.hand} as TileHand;
 
     // TODO: Eventually be able to take in a hand
   }
 
-  toggleGroup(e: any) {
-    this.isGrouped = !this.isGrouped;
+  toggleSuggest(e: any) {
+    this.doSuggest = !this.doSuggest;
   }
 
-  openTilePickerDialog(handIndex: number) {
+  openTilePickerDialog(groupIndexIn?: number) {
+    const groupIndex: number = Number(groupIndexIn);
+
     const dialogRef = this.dialog.open(TilePickerDialogComponent, {
       data: {
-        isGrouped: this.isGrouped,
-        isDouble: handIndex === 12
+        doSuggest: this.doSuggest,
+        doAdd: isNaN(groupIndex),
       } as TilePickerDialogData,
       exitAnimationDuration: 500
     });
 
     dialogRef.afterClosed().subscribe((result: TilePickerDialogResult) => {
-      result.tileKeyArray.forEach((tileKey, index) => {
-
-
-      });
-      for (let i = 0; i < result.tileKeyArray.length; i++) {
-        const index = this.isGrouped ? handIndex + i : handIndex;
-        this.hand[index] = new Tile(result.tileKeyArray[i]);
-      }
-
-      if (this.isGrouped) {
-        const groupIndex: number = Math.floor(handIndex / 3);
-        this.handGroupInformation[groupIndex] = result as GroupInformation;
+      if (!isNaN(groupIndex)) {
+        if (result?.doDelete && Number(groupIndex) < this.hand.tileGroupArray.length) {
+          this.hand.tileGroupArray.splice(groupIndex,1);
+        }
+        if (!result?.doDelete && result?.tileKeyArray) {
+          this.hand.tileGroupArray[Number(groupIndex)] = new TileGroup(
+            [...result.tileKeyArray],
+            result.isConcealed
+          );
+        }
+      } 
+      else if (result?.tileKeyArray) {
+        this.hand.tileGroupArray.push(new TileGroup(
+          [...result.tileKeyArray],
+          result.isConcealed
+        ));
       }
 
       this.updateSubmitButton();
+      this.updateSingleWait();
     });
   }
 
@@ -113,18 +108,47 @@ export class HandBuilderComponent {
   }
 
   updateSubmitButton(): void {
-    for (let tile of this.hand) {
-      if (tile.key === 'Back' || tile.key === 'Invalid') {
+    let tileCount: number = 0;
+
+    for (let group of this.hand.tileGroupArray) {
+      if (group.tileKeyArray.includes('Back') || group.tileKeyArray.includes('Invalid')) {
         this.isSubmitButtonDisabled = true;
         return;
       }
-    }
 
-    this.isSubmitButtonDisabled = false;
+      tileCount += group.tileKeyArray?.length;
+    };
+
+    this.isSubmitButtonDisabled = tileCount < 14 ? true : false;
   }
 
+  updateSingleWait(): void {
+    let kongCount: number = 0;
+    for (let group of this.hand.tileGroupArray) {
+      if (group.tileKeyArray.length === 4)
+        kongCount++;
+    }
+
+    this.isSingleWait = kongCount === 4 ? false : this.isSingleWait;
+    this.isSingleWaitDisabled = kongCount === 4;
+
+  }
+
+  // TODO: This doesn't work!
   resetHand(): void {
     this.hand = this.defaultHand;
+    this.flowerTileCount = 0;
+    this.isSingleWait = false;
+    this.isSingleWaitDisabled = false;
+    this.isSeatWind = false;
+    this.isPrevalentWind = false;
+    this.isLastOfKind = false;
+    this.isLastTile = false;
+    this.isReplacementTile = false;
+    this.isRobbingKong = false;
+    this.isMeldedHand = false;
+    this.isConcealedHandDiscard = false;
+    this.isConcealedHandSelf = false;
     this.updateSubmitButton();
   }
 }

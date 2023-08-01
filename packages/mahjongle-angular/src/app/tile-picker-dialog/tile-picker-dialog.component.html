@@ -15,9 +15,9 @@
             (click)="onSuitButtonClicked('dragon')">Dragons<br />(三元牌)</button>
         </div>
       </mat-tab>
-      <mat-tab label="Tile">
+      <mat-tab label="Tile" [disabled]="!currentSuit">
         <div class="tile-picker-group-content">
-          <ng-container *ngIf="!isCurrentSuitHonor">
+          <ng-container *ngIf="currentSuitCode && !isCurrentSuitHonor">
             <div class="ripple-container" matRipple (click)="onTileClicked('1')">
               <img class="tile-picker-tile-image" src="../../assets/images/tiles/{{currentSuitCode + 1}}.png" />
             </div>
@@ -73,43 +73,47 @@
           </ng-container>
         </div>
       </mat-tab>
-      <mat-tab label="Group" *ngIf="isGrouped" [disabled]="!currentTileValue">
+      <mat-tab label="Group" *ngIf="doSuggest" [disabled]="!currentTileValue">
         <div class="tile-picker-group-content">
           <div class="ripple-container tile-picker-tile-group-container" matRipple 
             *ngFor="let group of tileCodeGroupArray; let last = last" (click)="onGroupClick(group)">
             <div class="tile-picker-tile-group" *ngFor="let tileCode of group">
               <img class="tile-picker-tile-image" style="margin: 1em 0em 1em 0em;" src="../../assets/images/tiles/{{tileCode}}.png" />
-              <mat-divider></mat-divider>
+              <!-- <mat-divider></mat-divider> -->
             </div>
+            <mat-divider></mat-divider>
           </div>
           <div class="ripple-container tile-picker-tile-group-container" matRipple (click)="onGroupClick(tripleGroup)">
-            <mat-icon class="concealed-icon" fontIcon="visibility_off"></mat-icon>
+            <mat-icon class="concealed-icon" fontIcon="visibility_off" aria-label="Concealed"></mat-icon>
             <div class="tile-picker-tile-group" *ngFor="let tileCode of tripleGroup">
               <img class="tile-picker-tile-image" style="margin: 1em 0em 1em 0em;" src="../../assets/images/tiles/{{tileCode}}.png" />
-              <mat-divider></mat-divider>
             </div>
+            <mat-divider></mat-divider>
           </div>
           <div class="ripple-container tile-picker-tile-group-container" matRipple (click)="onGroupClick(quadrupleGroup)">
             <!-- <mat-icon style="position: fixed; width: 100%; text-align: right;" fontIcon="visibility"></mat-icon> -->
             <div class="tile-picker-tile-group" *ngFor="let tileCode of quadrupleGroup">
               <img class="tile-picker-tile-image-small" style="margin: 1em 0em 1em 0em;" src="../../assets/images/tiles/{{tileCode}}.png" />
-              <mat-divider></mat-divider>
             </div>
+            <mat-divider></mat-divider>
           </div>
           <div class="ripple-container tile-picker-tile-group-container" matRipple (click)="onGroupClick(quadrupleGroup)">
-            <mat-icon class="concealed-icon" fontIcon="visibility_off"></mat-icon>
+            <mat-icon class="concealed-icon" fontIcon="visibility_off" aria-label="Concealed"></mat-icon>
             <div class="tile-picker-tile-group" *ngFor="let tileCode of quadrupleGroup">
               <img class="tile-picker-tile-image-small" style="margin: 1em 0em 1em 0em;" src="../../assets/images/tiles/{{tileCode}}.png" />
-              <mat-divider></mat-divider>
             </div>
           </div>
         </div>
       </mat-tab>
     </mat-tab-group>
 
-    <div id="tile-picker-dialog-annotation">To select tiles individually, please close this window and toggle the "group tiles" option</div>
+    <!-- <div id="tile-picker-dialog-annotation">To select tiles individually, please close this window and toggle the "suggest tiles" option</div> -->
   </mat-dialog-content>
 
-
+  <div>
+    <button *ngIf="!doAdd" style="width: 50%;" mat-raised-button color="warn" (click)="onDeleteClick()">Delete</button>
+    <button *ngIf="!doAdd" style="width: 50%;" mat-raised-button color="primary" (click)="onCloseClick()">Close</button>
+    <button *ngIf="doAdd" style="width: 100%;" mat-raised-button color="primary" (click)="onCloseClick()">Close</button>
+  </div>
 </div>
 

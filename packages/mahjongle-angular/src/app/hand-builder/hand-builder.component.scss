@@ -17,6 +17,18 @@
   width: 100%;
 }
 
+#hand-builder-group-add-container {
+  display: inline-block;
+  position: relative;
+  height: 6.5em;
+  width: 5em;
+  top: -4em;
+}
+
+#hand-builder-group-add-button {
+  top: 25%;
+}
+
 .hand-builder-toolbar {
   padding: 1em;
   text-align: right;

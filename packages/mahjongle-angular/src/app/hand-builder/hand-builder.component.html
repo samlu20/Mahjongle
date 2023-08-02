@@ -42,7 +42,7 @@
       <tr>
         <mat-form-field>
           <mat-label>Number of Flower Tile(s)</mat-label>
-          <mat-select [(value)]="flowerTileCount">
+          <mat-select [(value)]="hand.flowerTileCount">
             <mat-option [value]="0" selected>0</mat-option>
             <mat-option [value]="1">1</mat-option>
             <mat-option [value]="2">2</mat-option>
@@ -59,61 +59,61 @@
 
     <table class="hand-builder-hand-table">
       <div>
-        <mat-checkbox [disabled]="isSingleWaitDisabled" [checked]="isSingleWait">Single Wait</mat-checkbox>
+        <mat-checkbox [disabled]="isSingleWaitDisabled" [(ngModel)]="hand.isSingleWait">Single Wait</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Single Wait','(1 point) Includes Edge, Closed, and Single Waits.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isSeatWind">Seat Wind</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hand.isSeatWind">Seat Wind</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Seat Wind','(2 points) Hand includes a pung (or kong) of the player’s seat wind.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isPrevalentWind">Prevalent Wind</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hand.isPrevalentWind">Prevalent Wind</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Prevalent Wind','(2 points) Hand includes a pung (or kong) of the prevalent wind.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isConcealedHandDiscard">Concealed Hand (won off discard)</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hand.isConcealedHandDiscard">Concealed Hand (won off discard)</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Concealed Hand (won off discard)','(2 points) Hand includes four concealed sets and is won by discard.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isConcealedHandSelf">Concealed Hand (won by self-draw)</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hand.isConcealedHandSelf">Concealed Hand (won by self-draw)</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Concealed Hand (won by self-draw)','(4 points) Hand consists entirely of concealed sets and is won by self-draw.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isLastOfKind">Last of Its Kind</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hand.isLastOfKind">Last of Its Kind</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Last of Its Kind','(4 points) This must be clear based on the visible discards, melds, and the winning player’s hand.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isMeldedHand">Melded Hand</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hand.isMeldedHand">Melded Hand</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Melded Hand','(6 points) Hand includes four melded sets and is won by discard.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isLastTile">Last Tile Draw</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hand.isLastTile">Last Tile Draw</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Last Tile Draw','(8 points) Includes winning on last wall tile or last discarded tile.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isReplacementTile">Out with Replacement Tile</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hand.isReplacementTile">Out with Replacement Tile</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Out with Replacement Tile','(8 points) Winning on the replacement tile drawn after declaring a kong. Counts as self-drawn.')">
           <mat-icon>info</mat-icon>
         </button>
       </div>
       <div>
-        <mat-checkbox [checked]="isRobbingKong">Robbing the Kong</mat-checkbox>
+        <mat-checkbox [(ngModel)]="hand.isRobbingKong">Robbing the Kong</mat-checkbox>
         <button mat-icon-button color="primary" (click)="openHelpDialog('Robbing the Kong','(8 points) Winning off the tile that somebody adds to a melded pung.')">
           <mat-icon>info</mat-icon>
         </button>

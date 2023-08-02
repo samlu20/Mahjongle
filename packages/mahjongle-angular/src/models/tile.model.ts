@@ -1,8 +1,44 @@
 export class TileHand {
   tileGroupArray: Array<TileGroup> = [];
+  flowerTileCount: number = 0;
+  isSingleWait: boolean = false;
+  isSingleWaitDisabled: boolean = false;
+  isSeatWind: boolean = false;
+  isPrevalentWind: boolean = false;
+  isLastOfKind: boolean = false;
+  isLastTile: boolean = false;
+  isReplacementTile: boolean = false;
+  isRobbingKong: boolean = false;
+  isMeldedHand: boolean = false;
+  isConcealedHandDiscard: boolean = false;
+  isConcealedHandSelf: boolean = false;
 
-  constructor(tileGroupArrayIn?: Array<TileGroup>) {
+  constructor(tileGroupArrayIn?: Array<TileGroup>,
+    flowerTileCountIn?: number,
+    isSingleWaitIn?: boolean,
+    isSingleWaitDisabledIn?: boolean,
+    isSeatWindIn?: boolean,
+    isPrevalentWindIn?: boolean,
+    isLastOfKindIn?: boolean,
+    isLastTileIn?: boolean,
+    isReplacementTileIn?: boolean,
+    isRobbingKongIn?: boolean,
+    isMeldedHandIn?: boolean,
+    isConcealedHandDiscardIn?: boolean,
+    isConcealedHandSelfIn?: boolean,) {
     this.tileGroupArray = tileGroupArrayIn ?? [];
+    this.flowerTileCount = flowerTileCountIn ?? 0;
+    this.isSingleWait = isSingleWaitIn ?? false;
+    this.isSingleWaitDisabled = isSingleWaitDisabledIn ?? false;
+    this.isSeatWind = isSeatWindIn ?? false;
+    this.isPrevalentWind = isPrevalentWindIn ?? false;
+    this.isLastOfKind = isLastOfKindIn ?? false;
+    this.isLastTile = isLastTileIn ?? false;
+    this.isReplacementTile = isReplacementTileIn ?? false;
+    this.isRobbingKong = isRobbingKongIn ?? false;
+    this.isMeldedHand = isMeldedHandIn ?? false;
+    this.isConcealedHandDiscard = isConcealedHandDiscardIn ?? false;
+    this.isConcealedHandSelf = isConcealedHandSelfIn ?? false;
   }
 }
 

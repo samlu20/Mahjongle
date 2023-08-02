@@ -9,14 +9,7 @@ import { HelpDialogData } from '../../models/help-dialog-data.model';
 import { TilePickerDialogComponent } from '../tile-picker-dialog/tile-picker-dialog.component';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 
-interface GroupInformation {
-  tileKeyArray: Array<string>;
-  isKong: boolean;
-  isConcealed: boolean;
-};
-
-const WINNING_HAND_SIZE = 13;
-const NORMAL_HAND_SIZE = 12;
+const NORMAL_HAND_SIZE = 14;
 
 @Component({
   selector: 'app-hand-builder',
@@ -30,32 +23,22 @@ export class HandBuilderComponent {
 
   doSuggest: boolean = true;
   isSubmitButtonDisabled: boolean = true;
-
-  // Hand info
-  // TODO: Turn this into a model
-  flowerTileCount: number = 0;
-  isSingleWait: boolean = false;
   isSingleWaitDisabled: boolean = false;
-  isSeatWind: boolean = false;
-  isPrevalentWind: boolean = false;
-  isLastOfKind: boolean = false;
-  isLastTile: boolean = false;
-  isReplacementTile: boolean = false;
-  isRobbingKong: boolean = false;
-  isMeldedHand: boolean = false;
-  isConcealedHandDiscard: boolean = false;
-  isConcealedHandSelf: boolean = false;
-  private handGroupInformation: Array<GroupInformation> = [];
 
   constructor(private dialog: MatDialog) {
-    this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
-    // this.handGroup.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
-    // this.handGroup.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
-    // this.handGroup.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
-    // this.handGroup.tileGroupArray.push(new TileGroup(new Array(2).fill('Back')));
+    // this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
+    this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('C1')));
+    this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('D2')));
+    this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('B3')));
+    this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('C9')));
+    this.hand.tileGroupArray.push(new TileGroup(new Array(2).fill('RG')));
     this.defaultHand = {...this.hand} as TileHand;
 
-    // TODO: Eventually be able to take in a hand
+    // TODO: Eventually be able to take in a hand?
+  }
+
+  ngOnInit() {
+    this.updateSubmitButton();
   }
 
   toggleSuggest(e: any) {
@@ -119,7 +102,7 @@ export class HandBuilderComponent {
       tileCount += group.tileKeyArray?.length;
     };
 
-    this.isSubmitButtonDisabled = tileCount < 14 ? true : false;
+    this.isSubmitButtonDisabled = tileCount < NORMAL_HAND_SIZE ? true : false;
   }
 
   updateSingleWait(): void {
@@ -129,26 +112,15 @@ export class HandBuilderComponent {
         kongCount++;
     }
 
-    this.isSingleWait = kongCount === 4 ? false : this.isSingleWait;
+    this.hand.isSingleWait = kongCount === 4 ? false : this.hand.isSingleWait;
     this.isSingleWaitDisabled = kongCount === 4;
 
   }
 
   // TODO: This doesn't work!
   resetHand(): void {
-    this.hand = this.defaultHand;
-    this.flowerTileCount = 0;
-    this.isSingleWait = false;
-    this.isSingleWaitDisabled = false;
-    this.isSeatWind = false;
-    this.isPrevalentWind = false;
-    this.isLastOfKind = false;
-    this.isLastTile = false;
-    this.isReplacementTile = false;
-    this.isRobbingKong = false;
-    this.isMeldedHand = false;
-    this.isConcealedHandDiscard = false;
-    this.isConcealedHandSelf = false;
+    this.hand = new TileHand(this.defaultHand.tileGroupArray);
     this.updateSubmitButton();
   }
+
 }

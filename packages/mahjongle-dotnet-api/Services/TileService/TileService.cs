@@ -27,7 +27,7 @@ namespace mahjongle_dotnet_api.Services.TileService
 
     public async Task<ServiceResponse<List<Tile>>> GetBambooTiles()
     {
-      /*
+
       // SELECT * FROM tile WHERE suit = 'bamboo';
       var serviceResponse = new ServiceResponse<List<Tile>>();
       serviceResponse.Data = new List<Tile> {
@@ -42,7 +42,8 @@ namespace mahjongle_dotnet_api.Services.TileService
             new Tile { Suit = TileSuit.Bamboo, Key = "9B", Value = "9" },
         };
       return serviceResponse;
-      */
+
+      /*
       // Connect to a PostgreSQL database
       var connection = new NpgsqlConnection("Host=mahjongle-db.corvffpxyrd6.us-east-2.rds.amazonaws.com; Database=mahjongle; Username=postgres; Password=MinsshiFaker#3");
       // var connection = _databaseService.GetDatabaseConnection();
@@ -65,6 +66,7 @@ namespace mahjongle_dotnet_api.Services.TileService
 
       connection.Close();
       return serviceResponse;
+      */
     }
 
     public async Task<ServiceResponse<List<Tile>>> GetCharacterTiles()

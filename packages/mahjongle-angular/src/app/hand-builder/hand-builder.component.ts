@@ -8,6 +8,7 @@ import { TilePickerDialogResult } from '../../models/tile-picker-dialog-result.m
 import { HelpDialogData } from '../../models/help-dialog-data.model';
 import { TilePickerDialogComponent } from '../tile-picker-dialog/tile-picker-dialog.component';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
+import { TileHandService } from '../services/tile-hand.service';
 
 const NORMAL_HAND_SIZE = 14;
 
@@ -25,7 +26,7 @@ export class HandBuilderComponent {
   isSubmitButtonDisabled: boolean = true;
   isSingleWaitDisabled: boolean = false;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private tileHandService: TileHandService) {
     // this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('Back')));
     this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('C1')));
     this.hand.tileGroupArray.push(new TileGroup(new Array(3).fill('D2')));
@@ -117,10 +118,18 @@ export class HandBuilderComponent {
 
   }
 
-  // TODO: This doesn't work!
   resetHand(): void {
     this.hand = new TileHand(this.defaultHand.tileGroupArray);
     this.updateSubmitButton();
   }
 
+  onSubmitClick() {
+    let score: number = -1;
+    this.tileHandService.getHandScore(this.hand).subscribe(
+      (r: number) => {
+        score = r;
+        alert(`Score: ${score}`);
+      }
+    );
+  }
 }

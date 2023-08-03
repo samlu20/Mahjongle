@@ -121,7 +121,8 @@
     </table>
   </div>
   <div>
-    <button id="hand-builder-submit-button" mat-raised-button color="primary" [disabled]="isSubmitButtonDisabled">Submit</button>
+    <button id="hand-builder-submit-button" mat-raised-button color="primary" 
+      [disabled]="isSubmitButtonDisabled" (click)="onSubmitClick()">Submit</button>
   </div>
   
 </mat-card>

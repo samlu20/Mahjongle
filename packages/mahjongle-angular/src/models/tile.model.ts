@@ -2,7 +2,6 @@ export class TileHand {
   tileGroupArray: Array<TileGroup> = [];
   flowerTileCount: number = 0;
   isSingleWait: boolean = false;
-  isSingleWaitDisabled: boolean = false;
   isSeatWind: boolean = false;
   isPrevalentWind: boolean = false;
   isLastOfKind: boolean = false;
@@ -16,7 +15,6 @@ export class TileHand {
   constructor(tileGroupArrayIn?: Array<TileGroup>,
     flowerTileCountIn?: number,
     isSingleWaitIn?: boolean,
-    isSingleWaitDisabledIn?: boolean,
     isSeatWindIn?: boolean,
     isPrevalentWindIn?: boolean,
     isLastOfKindIn?: boolean,
@@ -29,7 +27,6 @@ export class TileHand {
     this.tileGroupArray = tileGroupArrayIn ?? [];
     this.flowerTileCount = flowerTileCountIn ?? 0;
     this.isSingleWait = isSingleWaitIn ?? false;
-    this.isSingleWaitDisabled = isSingleWaitDisabledIn ?? false;
     this.isSeatWind = isSeatWindIn ?? false;
     this.isPrevalentWind = isPrevalentWindIn ?? false;
     this.isLastOfKind = isLastOfKindIn ?? false;

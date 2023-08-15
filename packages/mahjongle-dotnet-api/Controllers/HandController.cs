@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using mahjongle_dotnet_api.Services.HandService;
 
+
 namespace mahjongle_dotnet_api.Controllers
 {
   [ApiController]
@@ -21,11 +22,14 @@ namespace mahjongle_dotnet_api.Controllers
       this._handService = handService;
     }
 
+
+    // TODO: Consider making this return hand information
     [HttpPost("CalculateHandScore")]
     public ActionResult<int> CalculateHandScore(GroupedHand groupedHand)
     {
-      int score = -2;
-      score = this._handService.GetHandScore(groupedHand);
+      string debugString = "";
+      int score = this._handService.GetHandScore(groupedHand, ref debugString);
+
       return Ok(score);
     }
 

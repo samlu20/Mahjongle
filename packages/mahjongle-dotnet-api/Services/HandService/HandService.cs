@@ -48,6 +48,13 @@ namespace mahjongle_dotnet_api.Services.HandService
                 else
                     score = 88;
             }
+            else if (IsSevenShiftedPairs(groupedHand))
+            {
+                if (groupedHand.IsConcealedHandSelf)
+                    score = 88 + 4;
+                else
+                    score = 88;
+            }
         }
 
         if (groupedHand.FlowerTileCount > 0)
@@ -121,6 +128,24 @@ namespace mahjongle_dotnet_api.Services.HandService
         handKeyHashSet.ExceptWith(orphanKeyHashSet);
         
         return handKeyHashSet.Count == 0 && doubleKey != "";
+    }
+
+    private bool IsSevenShiftedPairs(GroupedHand hand) {
+        List<string> tileKeyList = new List<string>();
+        foreach (TileGroup group in hand.TileGroupList)
+        {
+            foreach (string tileKey in group.TileKeyList)
+            {
+                tileKeyList.Add(tileKey);
+            }
+        }
+
+        if (tileKeyList.Distinct().Count() != 7)
+            return false;
+
+        tileKeyList.Sort();
+        List<int> tileValueList = tileKeyList.Distinct().ToList().ConvertAll(key => key[1] - '0');
+        return Enumerable.Range(tileValueList.Min(), tileValueList.Count()).SequenceEqual(tileValueList);
     }
 
   }

@@ -14,10 +14,11 @@ namespace mahjongle_dotnet_api.Services.HandService
     public int GetHandScore(GroupedHand groupedHand, ref string debugString)
     {
 
-        if (!ValidateHand(groupedHand))
+        if (!IsValidHand(groupedHand))
             return -1;
 
         int score = 0;
+        bool isSpecialHand = false;
 
         if (groupedHand.IsSingleWait) // TODO: Check if there are 4 kongs
             score += 1;
@@ -47,6 +48,7 @@ namespace mahjongle_dotnet_api.Services.HandService
                     score = 88 + 4;
                 else
                     score = 88;
+                isSpecialHand = true;
             }
             else if (IsSevenShiftedPairs(groupedHand))
             {
@@ -54,6 +56,12 @@ namespace mahjongle_dotnet_api.Services.HandService
                     score = 88 + 4;
                 else
                     score = 88;
+                isSpecialHand = true;
+            }
+        }
+        if (!isSpecialHand) {
+            if (IsAllGreen(groupedHand)) {
+                score += 88;
             }
         }
 
@@ -64,7 +72,7 @@ namespace mahjongle_dotnet_api.Services.HandService
     }
 
     // TODO: Validate key
-    private bool ValidateHand(GroupedHand hand) 
+    private bool IsValidHand(GroupedHand hand) 
     {
         IDictionary<string, int> tileKeys = new Dictionary<string, int>();
         int tileCount = 0;
@@ -146,6 +154,36 @@ namespace mahjongle_dotnet_api.Services.HandService
         tileKeyList.Sort();
         List<int> tileValueList = tileKeyList.Distinct().ToList().ConvertAll(key => key[1] - '0');
         return Enumerable.Range(tileValueList.Min(), tileValueList.Count()).SequenceEqual(tileValueList);
+    }
+
+    private bool IsAllGreen(GroupedHand hand) 
+    {
+        var greenKeyHashSet = new HashSet<string>();
+        greenKeyHashSet.UnionWith(new[] {
+            TileEnum.BambooTwo,
+            TileEnum.BambooThree,
+            TileEnum.BambooFour,
+            TileEnum.BambooSix,
+            TileEnum.BambooEight,
+            TileEnum.DragonGreen,
+        });
+
+        var handKeyHashSet = GetKeyList(hand).Distinct().ToHashSet();
+        handKeyHashSet.ExceptWith(greenKeyHashSet);
+        return handKeyHashSet.Count() == 0;
+    }
+
+    private List<string> GetKeyList(GroupedHand hand) {
+        List<string> tileKeyList = new List<string>();
+        foreach (TileGroup group in hand.TileGroupList)
+        {
+            foreach (string tileKey in group.TileKeyList)
+            {
+                tileKeyList.Add(tileKey);
+            }
+        }
+
+        return tileKeyList;
     }
 
   }
